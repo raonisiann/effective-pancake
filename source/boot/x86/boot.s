@@ -1,6 +1,8 @@
 
 .code16
 .section .text
+.globl main
+.globl disk_load
 .globl _start 
 
 _start:
@@ -23,12 +25,13 @@ print:
 	jmp print
 
 end_of_code:
-	movb $0x0, %ah
-	int $0x16
+	nop
+	jmp disk_load
+	
 
 .section .data
 message:
-	.ascii "hello kraio"
+	.ascii "hello brother"
 
 .section .bootsig, "a"
         .byte 0x55
