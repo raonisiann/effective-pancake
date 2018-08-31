@@ -14,5 +14,5 @@ ifeq ($(BIN_DIR_EXISTS),0)
 endif
 	$(MAKE) -C source/boot/x86
 clean:
-	rm -f $(SOURCE_FOLDER)/*.o
-	rm -f $(BIN_FOLDER)/*
+	rm -f $(SOURCE_DIR)/*.o
+	rm -f $(BIN_DIR)/*
