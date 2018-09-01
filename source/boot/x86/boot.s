@@ -1,7 +1,6 @@
-
 .code16
 .section .text
-.globl main
+.globl kmain
 .globl disk_load
 .globl _start 
 
@@ -13,14 +12,15 @@ _init:
 	movw %ax, %ds
 	movw %ax, %es
 	movw %ax, %ss	
-
-	leaw message, %si	
+	
+	leaw message, %si
+	movb $0x0e, %ah
 	jmp print
+
 print:
 	lodsb
-	andb %al, %al
-	je end_of_code
-	movb $0x0e, %ah
+	orb %al, %al
+	jz end_of_code
 	int $0x10
 	jmp print
 
@@ -31,7 +31,7 @@ end_of_code:
 
 .section .data
 message:
-	.ascii "hello brother"
+	.asciz "hello brother"
 
 .section .bootsig, "a"
         .byte 0x55
