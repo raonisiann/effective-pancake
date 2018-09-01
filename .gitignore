@@ -2,3 +2,4 @@ bin
 tmp
 peda-session-unknown.txt
 .gdb_history
+*.o
