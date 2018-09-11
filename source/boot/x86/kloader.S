@@ -27,9 +27,11 @@ load_kernel:
 
 /*
 	Lets put our kernel in 0x10000.
-	Address = (0x7C00 * 0x10) + 0x10000
+	Address: 
+		ES:BX 
+		(0x1000 * 0x10) + 0x0 = 0x10000 
 */
-	movw $0x10000, %bx
+	movw $0x0, %bx
 
 	int $0x13
 
