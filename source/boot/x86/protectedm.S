@@ -47,5 +47,5 @@ gdt_table:
 	GDT_ENTRY(0xfffff, 0x00000000, GDT_FLAG_WRITE)
 
 gdt_descriptor:
-		.word (gdt_descriptor - gdt_table - 1)
+		.word (gdt_descriptor - gdt_table)
 		.long GDT_ADDRESS
