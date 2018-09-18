@@ -1,4 +1,5 @@
-
+OUTPUT_FORMAT(binary)
+OUTPUT_ARCH(i386)
 ENTRY(kmain)
 
 SECTIONS{
@@ -8,5 +9,5 @@ SECTIONS{
 	.data  		: { kmain.o(.data) }
 	.bss   		: { kmain.o(.bss) }
 
-	/DISCARD/ : { *(.comment .eh_frame .note.GNU-stack) }
+	/DISCARD/ 	: { *(.comment .eh_frame .note.GNU-stack) }
 }
