@@ -1,6 +1,7 @@
 OUT_DIR=$(ROOT_DIR)/$(BIN_DIR)
 INCLUDE_DIR=-I$(SRC_DIR)/kernel/include
-CC_FLAGS=$(INCLUDE_DIR) -Wall -Os -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin
+CC_FLAGS=$(INCLUDE_DIR)
+CC_FLAGS+= -m32 -Wall -Os -fno-asynchronous-unwind-tables -fno-pie -nostdlib -ffreestanding -fno-exceptions
 
 all: kmain.o
 	ld --oformat binary -Tkmain.ld -o $(OUT_DIR)/kmain kmain.o
