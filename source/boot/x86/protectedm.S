@@ -20,21 +20,27 @@ switch_protectedm:
 
  /* move gdt */
 	movw $GDT_ADDRESS >> 4, %ax
-	movw %ax, %es
-	movw $gdt_table, %si
-	xorw %di, %di
+    movw %ax, %es  
+	movw $gdt_table, %si  /* DS:SI (source) */
+	xorw %di, %di /* ES:DI (destination) */
 	movw $GDT_SIZE >> 2, %cx
+
+/* move a long string (32 bits) usgin DS:SI -> ES:DI 
+
+   DS:SI (src) = 0x0000:$gdt_table
+   ES:DI (dst) = 0x8000:0x0000 -->> (0x8000 * 0x10) + 0x0000 = 0x80000   
+*/
 	rep
 	movsl
 
 /* Load GDT */
 	lgdt gdt_descriptor
 
-/* Switch to protected mode */
+/* Switch to protected mode - bit 1*/
 	movl %cr0, %eax	
 	orl $0x1, %eax
-	movl %eax, %cr0
-	
+	movl %eax, %cr0	 
+
 /* Far jump to kmain at kernel/kmain.c */
 	ljmpl $0x8, $0x10000
 
