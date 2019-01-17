@@ -2,9 +2,32 @@
 #include <ktypes.h>
 #include <vga.h>
 
+
+void kmain(void){
+
+    __asm__ __volatile__ (
+        "nop\t\n"       
+        "jmp .\t\n"
+    );
+
+
+    init_segments();
+
+    clear_screen();
+
+    out_screen_char('A', 0, 0);
+
+    out_string("Ok, its working...\0");
+    out_string("So... is not to simply.\0");
+
+    for(;;);
+
+}
+
 static inline void init_segments(void){
     // Setup Segments
     __asm__ __volatile__ (
+        "jmp .\t\n"
         "movl $0x10, %eax\t\n"
         "movl %eax, %ds\t\n"       
         "movl %eax, %es\t\n"
@@ -48,19 +71,4 @@ void out_string(const char *str){
             x++;
         }
     }
-}
-
-void kmain(void){
-
-    init_segments();
-    
-    clear_screen();
-
-    out_screen_char('A', 0, 0);
-
-    out_string("Ok, its working...\0");
-    out_string("So... is not to simply.\0");
-
-    for(;;);
-  
 }
